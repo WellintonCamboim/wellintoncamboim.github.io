@@ -13,7 +13,43 @@
     "toggleToLight": "Switch to light theme",
     "toggleToDark": "Switch to dark theme"
   },
-  "home": {
-    "placeholder": "Site under construction — i18n and theme foundation ready."
+  "nav": {
+    "skipToContent": "Skip to content",
+    "about": "About",
+    "experience": "Experience",
+    "education": "Education",
+    "contact": "Contact"
+  },
+  "hero": {
+    "name": "Wellinton Camboim",
+    "role": "Full-Stack Software Engineer / Full-Stack Developer",
+    "tagline": "8 years in tech, focused on fintech and financial solutions, now evolving to specialize in applied AI engineering.",
+    "githubLabel": "View GitHub profile",
+    "linkedinLabel": "View LinkedIn profile",
+    "emailLabel": "Send an email"
+  },
+  "about": {
+    "heading": "About",
+    "body": "Full-stack software engineer with 8 years in tech, working on B2B products, SaaS, and financial and payment solutions. I work from the back-end to the front-end (Node.js, Go, Java, TypeScript, React, Next.js), focused on integrations, application security, and multi-tenant architecture. I now bring that same discipline to applied AI engineering, building with Claude Code and GitHub Copilot: agents with tool calling, MCP, and prompt-injection safeguards. I hold a degree in Engineering and I'm pursuing a postgraduate degree in Applied AI Engineering, plus a postgraduate degree in Business Management (BI and E-commerce) — my education taught me to understand the business before picking the tools and the software architecture."
+  },
+  "experience": {
+    "heading": "Experience",
+    "since": "since {date}",
+    "stackLabel": "Stack"
+  },
+  "education": {
+    "heading": "Education"
+  },
+  "contact": {
+    "heading": "Contact",
+    "intro": "Email, LinkedIn, and GitHub are the best ways to reach me.",
+    "emailLabel": "Email",
+    "linkedinLabel": "LinkedIn",
+    "githubLabel": "GitHub",
+    "locationLabel": "Location",
+    "location": "Camboriú, SC, Brazil (remote)"
+  },
+  "footer": {
+    "rights": "© {year} Wellinton Camboim. All rights reserved."
   }
 }

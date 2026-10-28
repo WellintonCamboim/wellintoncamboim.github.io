@@ -1,6 +1,11 @@
-import { getTranslations, setRequestLocale } from "next-intl/server";
-import { LocaleSwitcher } from "@/components/i18n/LocaleSwitcher";
-import { ThemeToggle } from "@/components/theme/ThemeToggle";
+import { setRequestLocale } from "next-intl/server";
+import { Footer } from "@/components/layout/Footer";
+import { Header } from "@/components/layout/Header";
+import { About } from "@/components/sections/About";
+import { Contact } from "@/components/sections/Contact";
+import { Education } from "@/components/sections/Education";
+import { Experience } from "@/components/sections/Experience";
+import { Hero } from "@/components/sections/Hero";
 
 export default async function HomePage({
   params,
@@ -10,18 +15,17 @@ export default async function HomePage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const t = await getTranslations("home");
-
   return (
-    <main
-      id="main-content"
-      className="flex min-h-screen flex-col items-center justify-center gap-6 p-8"
-    >
-      <div className="flex items-center gap-4">
-        <LocaleSwitcher />
-        <ThemeToggle />
-      </div>
-      <p className="text-center text-muted-foreground">{t("placeholder")}</p>
-    </main>
+    <>
+      <Header />
+      <main id="main-content">
+        <Hero />
+        <About />
+        <Experience />
+        <Education />
+        <Contact />
+      </main>
+      <Footer />
+    </>
   );
 }

@@ -2,6 +2,24 @@
 
 ADRs curtos. Um bloco por decisão, mais recente no topo.
 
+## Conteúdo de Experiência a partir dos currículos de referência
+
+**Contexto:** a seção 10.2 do documento original tinha `TODO(wellinton)` sobre o período na OKTO Payments ("atual"?) e a conclusão de Sistemas de Informação. O usuário indicou 3 currículos (`Curriculo_Wellinton_Camboim_{Engenheiro_FullStack,Engenheiro_Produto_IA,Desenvolvedor_FullStack}`) como fonte, além de um `Levantamento_Projetos_Okto_U4C.md` que se mostrou ser um relatório de auditoria de segurança real (nomes de clientes, vulnerabilidades, nomes de colegas) — incompatível com a seção 2 de confidencialidade.
+**Decisão:** usei os 3 currículos como fonte do texto de Experiência (`src/content/profile.ts`); o levantamento de segurança foi tratado só como contexto de fundo, sem nenhum fato específico citado. OKTO Payments ficou "desde ago/2024" sem data-fim (confirmado pelo usuário, apesar dos currículos citarem "ago/2024 – out/2026"); Sistemas de Informação ficou "Bacharelado... (2017–2020)" sem entrar na divergência entre currículos.
+**Consequência:** `content/_todo.md` documenta os itens ainda sem fonte confirmada (rótulos de skills, certificações, números da seção 10.4) para as próximas fases.
+
+## Ícones de marca: `simple-icons` para GitHub, SVG local para LinkedIn
+
+**Contexto:** `lucide-react` não inclui mais logos de marca (GitHub/LinkedIn foram removidos da lib). `simple-icons` também não tem mais o ícone do LinkedIn (provável remoção por pedido de marca).
+**Decisão:** GitHub via `simple-icons` (`siGithub`); LinkedIn via SVG local (`src/components/icons/linkedin.ts`) — exatamente a alternativa que a seção 4 do documento já previa ("simple-icons ou SVGs locais").
+**Consequência:** `BrandIcon` (`src/components/icons/BrandIcon.tsx`) renderiza qualquer `{ path }` como SVG inline com `currentColor`, então os dois ícones usam o mesmo componente.
+
+## Idioma/tema só no Header, não duplicados no Hero
+
+**Contexto:** a seção 9 lista "botões de idioma e tema" como parte do Hero, mas também existe um Header fixo com âncoras.
+**Decisão:** `LocaleSwitcher` e `ThemeToggle` ficam só no `Header` (fixo, visível em toda a página), não duplicados no Hero — mais simples e sem redundância.
+**Consequência:** nenhuma — é só uma escolha de layout, registrada para não ser revertida sem querer depois.
+
 ## i18n sem middleware, com dois layouts raiz (`[locale]` e `(root)`)
 
 **Contexto:** `output: export` não suporta middleware/rewrites/headers em runtime (confirmado na documentação atual do Next.js e do next-intl), então a negociação de idioma do `next-intl` baseada em middleware não funciona aqui. Ao mesmo tempo, a seção 5 exige uma página `/` que escolhe o idioma (preferência salva → `navigator.language` → `pt`) e redireciona, com `<html lang>` correto por rota.

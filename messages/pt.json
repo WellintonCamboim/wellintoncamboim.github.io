@@ -13,7 +13,43 @@
     "toggleToLight": "Ativar tema claro",
     "toggleToDark": "Ativar tema escuro"
   },
-  "home": {
-    "placeholder": "Site em construção — fundação de internacionalização e tema prontas."
+  "nav": {
+    "skipToContent": "Pular para o conteúdo",
+    "about": "Sobre",
+    "experience": "Experiência",
+    "education": "Formação",
+    "contact": "Contato"
+  },
+  "hero": {
+    "name": "Wellinton Camboim",
+    "role": "Engenheiro de Software Full-Stack / Desenvolvedor Full-Stack",
+    "tagline": "8 anos em tecnologia, com foco em fintech e soluções financeiras, evoluindo para se especializar em engenharia de IA aplicada.",
+    "githubLabel": "Ver perfil no GitHub",
+    "linkedinLabel": "Ver perfil no LinkedIn",
+    "emailLabel": "Enviar e-mail"
+  },
+  "about": {
+    "heading": "Sobre",
+    "body": "Engenheiro de software full-stack com 8 anos em tecnologia, atuando em produtos B2B, SaaS e soluções financeiras e de meios de pagamento. Trabalho do back-end ao front-end (Node.js, Go, Java, TypeScript, React, Next.js), com foco em integrações, segurança de aplicação e arquitetura multi-tenant. Hoje aplico essa mesma disciplina à engenharia de IA aplicada, desenvolvendo com Claude Code e GitHub Copilot: agentes com tool calling, MCP e proteção contra prompt injection. Sou formado em Engenharia e curso pós-graduação em Engenharia de IA Aplicada, além de uma pós-graduação em Gestão e Negócios (BI e E-commerce) — minhas formações me ensinaram a entender o negócio antes de escolher as ferramentas e a arquitetura de software."
+  },
+  "experience": {
+    "heading": "Experiência",
+    "since": "desde {date}",
+    "stackLabel": "Stack"
+  },
+  "education": {
+    "heading": "Formação"
+  },
+  "contact": {
+    "heading": "Contato",
+    "intro": "Email, LinkedIn e GitHub são os melhores caminhos para falar comigo.",
+    "emailLabel": "E-mail",
+    "linkedinLabel": "LinkedIn",
+    "githubLabel": "GitHub",
+    "locationLabel": "Localização",
+    "location": "Camboriú, SC, Brasil (remoto)"
+  },
+  "footer": {
+    "rights": "© {year} Wellinton Camboim. Todos os direitos reservados."
   }
 }
