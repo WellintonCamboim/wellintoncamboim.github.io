@@ -1,34 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# camboim-dev
 
-## Getting Started
+Portfólio pessoal de Wellinton Camboim — site estático e trilíngue (PT/EN/ES), construído com Next.js e publicado no GitHub Pages.
 
-First, run the development server:
+## Stack
+
+Next.js (App Router) + TypeScript + Tailwind CSS v4, `next-intl` para i18n, `next-themes` para o tema claro/escuro, Vitest para testes. Veja `CLAUDE.md` para convenções detalhadas.
+
+## Como rodar
+
+Requer Node na versão fixada em `.nvmrc` (use `nvm use`, se disponível).
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Como testar
 
-## Learn More
+```bash
+npm run lint        # ESLint
+npm run typecheck   # tsc --noEmit
+npm run test        # Vitest
+npm run build       # build de produção (gera export estático em out/)
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Como publicar
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+O deploy é automático: todo push na branch `main` dispara o workflow `.github/workflows/deploy.yml`, que builda o site (`output: export`) e publica no GitHub Pages via GitHub Actions.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Pré-requisito único no repositório do GitHub: em **Settings → Pages → Source**, selecionar **GitHub Actions**.
 
-## Deploy on Vercel
+## Como editar conteúdo
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+_(a detalhar nas próximas fases, quando `messages/{pt,en,es}.json` e `content/{locale}/...` existirem)_
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Decisões de arquitetura
+
+Ver `docs/decisions.md`.
