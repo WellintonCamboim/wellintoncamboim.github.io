@@ -2,6 +2,18 @@
 
 ADRs curtos. Um bloco por decisão, mais recente no topo.
 
+## README bilíngue; CLAUDE.md só em português
+
+**Contexto:** `README.md` é a porta de entrada pública do repositório (público-alvo inclui recrutadores/líderes técnicos internacionais); `CLAUDE.md` é convenção interna de desenvolvimento, não vitrine pública.
+**Decisão:** `README.md` em inglês (principal) + `README.pt-BR.md` em português, com link cruzado entre os dois. `CLAUDE.md` permanece só em português.
+**Consequência:** mudanças no README precisam ser replicadas nos dois arquivos.
+
+## AGENTS.md fora do versionamento
+
+**Contexto:** o Next.js gera automaticamente um `AGENTS.md` (instruções genéricas do framework para agentes de IA) a cada `next dev`/`next build`; não tem conteúdo específico deste projeto.
+**Decisão:** ignorar no git (`.gitignore`) em vez de comitar.
+**Consequência:** o arquivo continua sendo gerado localmente, mas não aparece no repositório público nem gera diffs a cada atualização do Next.js.
+
 ## npm no lugar de pnpm
 
 **Contexto:** o documento de escopo original pedia pnpm. O ambiente de desenvolvimento não tinha pnpm instalado (só npm).

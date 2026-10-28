@@ -1,41 +1,43 @@
 # camboim-dev
 
-Portfólio pessoal de Wellinton Camboim — site estático e trilíngue (PT/EN/ES), construído com Next.js e publicado no GitHub Pages.
+🇺🇸 English · [🇧🇷 Português (Brasil)](./README.pt-BR.md)
+
+Wellinton Camboim's personal portfolio — a static, trilingual (PT/EN/ES) site built with Next.js and deployed to GitHub Pages.
 
 ## Stack
 
-Next.js (App Router) + TypeScript + Tailwind CSS v4, `next-intl` para i18n, `next-themes` para o tema claro/escuro, Vitest para testes. Veja `CLAUDE.md` para convenções detalhadas.
+Next.js (App Router) + TypeScript + Tailwind CSS v4, `next-intl` for i18n, `next-themes` for light/dark mode, Vitest for testing. See `CLAUDE.md` for detailed conventions (in Portuguese).
 
-## Como rodar
+## Getting started
 
-Requer Node na versão fixada em `.nvmrc` (use `nvm use`, se disponível).
+Requires the Node version pinned in `.nvmrc` (use `nvm use` if available).
 
 ```bash
 npm install
 npm run dev
 ```
 
-Abra [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000).
 
-## Como testar
+## Testing
 
 ```bash
 npm run lint        # ESLint
 npm run typecheck   # tsc --noEmit
 npm run test        # Vitest
-npm run build       # build de produção (gera export estático em out/)
+npm run build       # production build (generates a static export in out/)
 ```
 
-## Como publicar
+## Deploying
 
-O deploy é automático: todo push na branch `main` dispara o workflow `.github/workflows/deploy.yml`, que builda o site (`output: export`) e publica no GitHub Pages via GitHub Actions.
+Deploys are automatic: every push to `main` triggers `.github/workflows/deploy.yml`, which builds the site (`output: export`) and publishes it to GitHub Pages via GitHub Actions.
 
-Pré-requisito único no repositório do GitHub: em **Settings → Pages → Source**, selecionar **GitHub Actions**.
+One-time setup on the GitHub repository: under **Settings → Pages → Source**, select **GitHub Actions**.
 
-## Como editar conteúdo
+## Editing content
 
-_(a detalhar nas próximas fases, quando `messages/{pt,en,es}.json` e `content/{locale}/...` existirem)_
+_(to be detailed in later phases, once `messages/{pt,en,es}.json` and `content/{locale}/...` exist)_
 
-## Decisões de arquitetura
+## Architecture decisions
 
-Ver `docs/decisions.md`.
+See `docs/decisions.md`.
