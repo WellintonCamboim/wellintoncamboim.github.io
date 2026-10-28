@@ -6,8 +6,8 @@ Convenções deste projeto para quem (humano ou IA) for trabalhar no código. O 
 
 - Next.js (App Router) + React + TypeScript estrito.
 - Tailwind CSS v4 (CSS-first, tokens em `src/app/globals.css` via `@theme inline`).
-- `next-intl` para i18n (`/pt`, `/en`, `/es`) — ou alternativa mínima própria, se houver atrito com `output: export` (decisão a registrar em `docs/decisions.md`).
-- `next-themes` (ou equivalente) para tema claro/escuro via atributo `data-theme`.
+- `next-intl` para i18n (`/pt/`, `/en/`, `/es/`), sem middleware (incompatível com `output: export`); ver `docs/decisions.md` para a estrutura de rotas.
+- `next-themes` para tema claro/escuro via atributo `data-theme`.
 - Vitest para testes unitários; Playwright para smoke e2e (fases futuras).
 - Gerenciador de pacotes: **npm** (decisão registrada em `docs/decisions.md`; o documento original pedia pnpm).
 - Node: versão fixada em `.nvmrc`.
@@ -35,7 +35,7 @@ GitHub Pages via GitHub Actions (`.github/workflows/deploy.yml`), disparado em p
 "Terminal Noturno": dark-first, retrô/pixel discreto. Tokens principais em `src/app/globals.css`:
 
 - `--bg` / `--surface` / `--fg` / `--muted-fg` / `--border` / `--accent` / `--accent-fg`, redefinidos em `:root[data-theme="light"]` para o tema claro.
-- Tipografia: títulos em IBM Plex Mono (`--font-mono`), corpo em Inter (`--font-sans`), carregadas via `next/font/google` em `src/app/layout.tsx`.
+- Tipografia: títulos em IBM Plex Mono (`--font-mono`), corpo em Inter (`--font-sans`), carregadas via `next/font/google` em `src/app/[locale]/layout.tsx`.
 - Contraste mínimo AA nos dois temas; `color-scheme` respeitado para controles nativos.
 
 ## Regras de conteúdo e confidencialidade (obrigatórias)
@@ -56,7 +56,7 @@ Estudos de caso seguem o formato **contexto → desafio → o que foi feito → 
 
 ## Conteúdo e i18n
 
-- Nenhum texto hardcoded em componente — tudo vem de `messages/{pt,en,es}.json` ou `content/{locale}/...`.
+- Nenhum texto hardcoded em componente — tudo vem de `messages/{pt,en,es}.json` ou `content/{locale}/...`. Única exceção: a página `/` (`src/app/(root)/page.tsx`), que roda antes de o idioma ser conhecido — usa a cópia fixa trilíngue de `src/content/language-chooser.ts`.
 - Nada de conteúdo inventado: informação ainda não confirmada entra como `TODO(wellinton)` e é listada em `content/_todo.md`.
 - pt-BR é o idioma-fonte; EN/ES são traduções (tom profissional, não literal).
 

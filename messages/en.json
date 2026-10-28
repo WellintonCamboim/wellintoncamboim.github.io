@@ -1,0 +1,19 @@
+{
+  "common": {
+    "siteTitle": "Wellinton Camboim",
+    "siteDescription": "Wellinton Camboim's portfolio — a full-stack software engineer evolving into applied AI engineering."
+  },
+  "language": {
+    "label": "Language",
+    "pt": "Portuguese",
+    "en": "English",
+    "es": "Spanish"
+  },
+  "theme": {
+    "toggleToLight": "Switch to light theme",
+    "toggleToDark": "Switch to dark theme"
+  },
+  "home": {
+    "placeholder": "Site under construction — i18n and theme foundation ready."
+  }
+}

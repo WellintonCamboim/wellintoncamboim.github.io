@@ -1,0 +1,19 @@
+{
+  "common": {
+    "siteTitle": "Wellinton Camboim",
+    "siteDescription": "Portfólio de Wellinton Camboim — engenheiro de software full-stack evoluindo para engenharia de IA aplicada."
+  },
+  "language": {
+    "label": "Idioma",
+    "pt": "Português",
+    "en": "Inglês",
+    "es": "Espanhol"
+  },
+  "theme": {
+    "toggleToLight": "Ativar tema claro",
+    "toggleToDark": "Ativar tema escuro"
+  },
+  "home": {
+    "placeholder": "Site em construção — fundação de internacionalização e tema prontas."
+  }
+}
