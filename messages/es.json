@@ -17,6 +17,8 @@
     "skipToContent": "Saltar al contenido",
     "about": "Sobre mí",
     "experience": "Experiencia",
+    "caseStudies": "Estudios de caso",
+    "projects": "Proyectos",
     "education": "Formación",
     "contact": "Contacto"
   },
@@ -37,6 +39,20 @@
     "since": "desde {date}",
     "stackLabel": "Stack"
   },
+  "caseStudies": {
+    "heading": "Estudios de caso",
+    "challengeLabel": "Desafío",
+    "actionLabel": "Qué hice",
+    "outcomeLabel": "Resultado/aprendizaje",
+    "stackLabel": "Stack"
+  },
+  "projects": {
+    "heading": "Proyectos propios",
+    "demonstratesLabel": "Demuestra",
+    "stackLabel": "Stack",
+    "repoLinkLabel": "Ver repositorio",
+    "inDevelopmentBadge": "En desarrollo"
+  },
   "education": {
     "heading": "Formación"
   },
@@ -47,7 +63,7 @@
     "linkedinLabel": "LinkedIn",
     "githubLabel": "GitHub",
     "locationLabel": "Ubicación",
-    "location": "Camboriú, SC, Brasil (remoto)"
+    "location": "Camboriú, SC, Brasil"
   },
   "footer": {
     "rights": "© {year} Wellinton Camboim. Todos los derechos reservados."

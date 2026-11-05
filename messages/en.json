@@ -17,6 +17,8 @@
     "skipToContent": "Skip to content",
     "about": "About",
     "experience": "Experience",
+    "caseStudies": "Case studies",
+    "projects": "Projects",
     "education": "Education",
     "contact": "Contact"
   },
@@ -36,6 +38,20 @@
     "heading": "Experience",
     "since": "since {date}",
     "stackLabel": "Stack"
+  },
+  "caseStudies": {
+    "heading": "Case studies",
+    "challengeLabel": "Challenge",
+    "actionLabel": "What I did",
+    "outcomeLabel": "Outcome/learning",
+    "stackLabel": "Stack"
+  },
+  "projects": {
+    "heading": "Personal projects",
+    "demonstratesLabel": "Shows",
+    "stackLabel": "Stack",
+    "repoLinkLabel": "View repository",
+    "inDevelopmentBadge": "In development"
   },
   "education": {
     "heading": "Education"

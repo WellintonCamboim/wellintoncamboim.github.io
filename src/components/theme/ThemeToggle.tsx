@@ -1,13 +1,25 @@
 "use client";
 
+import { useSyncExternalStore } from "react";
 import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 import { Moon, Sun } from "lucide-react";
 
+const subscribe = () => () => {};
+
+function useHydrated() {
+  return useSyncExternalStore(
+    subscribe,
+    () => true,
+    () => false,
+  );
+}
+
 export function ThemeToggle() {
   const t = useTranslations("theme");
   const { resolvedTheme, setTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
+  const hydrated = useHydrated();
+  const isDark = hydrated && resolvedTheme === "dark";
 
   return (
     <button
@@ -17,7 +29,7 @@ export function ThemeToggle() {
       aria-label={isDark ? t("toggleToLight") : t("toggleToDark")}
       className="inline-flex size-9 items-center justify-center rounded-md border border-border text-foreground transition-colors hover:bg-surface"
     >
-      {resolvedTheme &&
+      {hydrated &&
         (isDark ? (
           <Sun aria-hidden="true" className="size-4" />
         ) : (

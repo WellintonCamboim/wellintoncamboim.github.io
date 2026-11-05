@@ -26,6 +26,12 @@ export function Header() {
             <a href="#experience" className="text-muted-foreground hover:text-foreground">
               {t("experience")}
             </a>
+            <a href="#case-studies" className="text-muted-foreground hover:text-foreground">
+              {t("caseStudies")}
+            </a>
+            <a href="#projects" className="text-muted-foreground hover:text-foreground">
+              {t("projects")}
+            </a>
             <a href="#education" className="text-muted-foreground hover:text-foreground">
               {t("education")}
             </a>
