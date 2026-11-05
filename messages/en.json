@@ -20,6 +20,7 @@
     "caseStudies": "Case studies",
     "projects": "Projects",
     "skills": "Skills",
+    "workingStyle": "How I work",
     "education": "Education",
     "contact": "Contact"
   },
@@ -57,6 +58,9 @@
   "skills": {
     "heading": "Skills",
     "secondaryHeading": "Other technologies and practices"
+  },
+  "workingStyle": {
+    "heading": "How I work"
   },
   "education": {
     "heading": "Education"

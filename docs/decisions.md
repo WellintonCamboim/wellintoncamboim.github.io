@@ -103,3 +103,15 @@ ADRs curtos. Um bloco por decisão, mais recente no topo.
 **Contexto:** seção 11 do documento original pede "uma cor de destaque por categoria de skill, sempre derivadas dos tokens do tema" — o mesmo princípio vale para as categorias do Tetris (Fase 5), ainda não implementado.
 **Decisão:** 4 novas variáveis CSS em `src/app/globals.css` (`--skill-frontend`, `--skill-backend`, `--skill-cloud`, `--skill-domain`), redefinidas no tema claro, todas validadas em ≥ 4.5:1 de contraste contra `--bg` e `--surface` nos dois temas. A categoria "IA aplicada" reaproveita `--accent` (mesma cor de destaque do site), em vez de uma quinta cor nova — reforça a narrativa de foco em IA aplicada.
 **Consequência:** essas variáveis ficam disponíveis para reuso nas peças do Tetris por categoria de skill (Fase 5), sem precisar de um novo sistema de cores nessa fase futura.
+
+## Stack do argus-ai corrigido a partir do repositório público
+
+**Contexto:** o campo `stack` do `argus-ai` em `src/content/projects.ts` tinha só "Python" desde a Fase 4.2, seguindo o documento original. O repositório é público; conferindo `pyproject.toml` e o README (`github.com/WellintonCamboim/argus-ai`), as dependências reais incluem `anthropic`, `langchain` e `langchain-openai`.
+**Decisão:** atualizar `stack` para "Python, LangChain, Anthropic SDK" nas 3 línguas — mesma fonte verificável (repositório público) já usada para o conteúdo do `catalog-ai`, não é conteúdo inventado.
+**Consequência:** este projeto é, hoje, a única evidência direta e confirmada de uso de LangChain (o `catalog-ai` declara explicitamente o contrário no próprio README).
+
+## "Como trabalho" (4.4): sem o número de PRs de colegas na evidência de Colaboração
+
+**Contexto:** a seção 12.3 do documento original lista "mais de 200 PRs de colegas integrados" como evidência do traço "Colaboração" — o mesmo número (sem fonte confirmada) que a ADR da Fase 4.1 já tinha decidido não publicar nos estudos de caso, pela mesma regra de não exibir estatística sem fonte confirmada.
+**Decisão:** manter a evidência de "Colaboração" qualitativa (code review e pair programming com o time), sem o número "200+ PRs".
+**Consequência:** `src/content/working-style.ts` não cita nenhuma estatística; se o número vier a ser confirmado, adicionar depois nas duas seções (estudos de caso e "Como trabalho") de uma vez.

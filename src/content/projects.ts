@@ -29,7 +29,7 @@ export const projects: Record<Locale, ProjectEntry[]> = {
       description:
         "Agente de suporte que analisa a documentação dos projetos, consulta Grafana e logs, e investiga bancos de dados para responder dúvidas de clientes e investigar bugs. Estruturado em orquestração do agente, tools (Grafana, banco de dados, documentação) e prompts.",
       highlights: "Automação de investigação de suporte combinando observabilidade e dados.",
-      stack: "Python",
+      stack: "Python, LangChain, Anthropic SDK",
       repoUrl: "https://github.com/WellintonCamboim/argus-ai",
       inDevelopment: true,
     },
@@ -49,6 +49,7 @@ export const projects: Record<Locale, ProjectEntry[]> = {
       highlights: "Go fora do trabalho, Docker Compose e migrations versionadas.",
       stack: "Go, PostgreSQL, Docker",
       repoUrl: "https://github.com/WellintonCamboim/wellbe",
+      inDevelopment: true,
     },
   ],
   en: [
@@ -68,7 +69,7 @@ export const projects: Record<Locale, ProjectEntry[]> = {
       description:
         "A support agent that analyzes project documentation, queries Grafana and logs, and investigates databases to answer customer questions and investigate bugs. Structured into agent orchestration, tools (Grafana, database, docs), and prompts.",
       highlights: "Support-investigation automation combining observability and data.",
-      stack: "Python",
+      stack: "Python, LangChain, Anthropic SDK",
       repoUrl: "https://github.com/WellintonCamboim/argus-ai",
       inDevelopment: true,
     },
@@ -88,6 +89,7 @@ export const projects: Record<Locale, ProjectEntry[]> = {
       highlights: "Go outside of work, Docker Compose, and versioned migrations.",
       stack: "Go, PostgreSQL, Docker",
       repoUrl: "https://github.com/WellintonCamboim/wellbe",
+      inDevelopment: true,
     },
   ],
   es: [
@@ -107,7 +109,7 @@ export const projects: Record<Locale, ProjectEntry[]> = {
       description:
         "Agente de soporte que analiza la documentación de los proyectos, consulta Grafana y logs, e investiga bases de datos para responder preguntas de clientes e investigar errores. Estructurado en orquestación del agente, tools (Grafana, base de datos, documentación) y prompts.",
       highlights: "Automatización de investigación de soporte combinando observabilidad y datos.",
-      stack: "Python",
+      stack: "Python, LangChain, Anthropic SDK",
       repoUrl: "https://github.com/WellintonCamboim/argus-ai",
       inDevelopment: true,
     },
@@ -127,6 +129,7 @@ export const projects: Record<Locale, ProjectEntry[]> = {
       highlights: "Go fuera del trabajo, Docker Compose y migraciones versionadas.",
       stack: "Go, PostgreSQL, Docker",
       repoUrl: "https://github.com/WellintonCamboim/wellbe",
+      inDevelopment: true,
     },
   ],
 };
