@@ -110,6 +110,18 @@ ADRs curtos. Um bloco por decisão, mais recente no topo.
 **Decisão:** atualizar `stack` para "Python, LangChain, Anthropic SDK" nas 3 línguas — mesma fonte verificável (repositório público) já usada para o conteúdo do `catalog-ai`, não é conteúdo inventado.
 **Consequência:** este projeto é, hoje, a única evidência direta e confirmada de uso de LangChain (o `catalog-ai` declara explicitamente o contrário no próprio README).
 
+## Tetris (5.1): rotação sem wall kicks
+
+**Contexto:** a seção 8 do documento pede "rotação" como uma das responsabilidades do `engine.ts`, sem exigir explicitamente o sistema SRS completo (com tabelas de wall kick). Implementar wall kicks corretos exigiria tabelas de offset por peça e por transição de rotação, sem ganho perceptível para um Tetris que só joga sozinho (o bot já simula todas as colunas e rotações possíveis antes de decidir, em vez de girar peças já posicionadas perto de paredes).
+**Decisão:** `rotateClockwise` em `src/lib/tetris/engine.ts` gira a peça num box 4x4 e simplesmente rejeita a rotação se colidir (sem tentar deslocar a peça para "encaixar", como o SRS faz). Cada peça é representada por uma única forma-base por tipo, rotacionada programaticamente (fórmula de rotação 90° num box 4x4) em vez de 4 tabelas manuais por peça.
+**Consequência:** perto das paredes, algumas rotações in-place podem ser rejeitadas onde o SRS real permitiria (via kick). Isso não afeta o bot (ele simula hard-drops a partir do spawn, não gira peças já encaixadas), nem os testes do `engine.ts`, que cobrem coordenadas explícitas em vez de depender de kicks.
+
+## Fase 4.5 (roadmap de IA aplicada) removida do site
+
+**Contexto:** a seção "Em evolução: IA aplicada" (`src/content/ai-roadmap.ts` + `AiRoadmap.tsx`) tinha sido implementada seguindo a seção 13 do documento original (5 itens com status Em andamento/Planejado/Em estudo), mas o usuário decidiu não ter esse item no site.
+**Decisão:** remover a seção inteira — componente, conteúdo, âncora no Header e chaves de mensagens nos 3 idiomas.
+**Consequência:** a Fase 4 termina em 4.4 ("Como trabalho"); a seção 13 do documento original não é mais usada como fonte de conteúdo do site.
+
 ## "Como trabalho" (4.4): sem o número de PRs de colegas na evidência de Colaboração
 
 **Contexto:** a seção 12.3 do documento original lista "mais de 200 PRs de colegas integrados" como evidência do traço "Colaboração" — o mesmo número (sem fonte confirmada) que a ADR da Fase 4.1 já tinha decidido não publicar nos estudos de caso, pela mesma regra de não exibir estatística sem fonte confirmada.
