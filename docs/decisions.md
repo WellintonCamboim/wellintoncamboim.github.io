@@ -85,3 +85,21 @@ ADRs curtos. Um bloco por decisão, mais recente no topo.
 **Contexto:** GitHub Pages só serve conteúdo estático; catalog-ai é uma aplicação full-stack com backend.
 **Decisão:** usar apenas screenshots/GIF do repositório (`docs/screenshots`), sem instância ao vivo.
 **Consequência:** sem custo/manutenção de infraestrutura externa para a demo.
+
+## Skills (4.3): sem distinção Aplicado/Em estudo
+
+**Contexto:** a seção 12.2 do documento original previa rótulos "Aplicado"/"Em estudo" por skill de segundo nível, mas várias delas não têm evidência direta nos 3 currículos de referência nem no código público (`catalog-ai`), e o usuário pediu para remover essa distinção da seção.
+**Decisão:** `src/content/skills.ts` não guarda nível por skill; `Skills.tsx` renderiza o segundo nível como chips simples (mesmo padrão visual do nível de destaque), sem rótulo de maturidade.
+**Consequência:** a pendência de confirmar rótulo por skill (`content/_todo.md`) deixa de existir — não há mais rótulo de maturidade a confirmar nesta seção.
+
+## Skills (4.3): sem campo `icon` no modelo de dados
+
+**Contexto:** o documento original sugeria `{ id, category, tier, level, icon }` como modelo de dados para `content/skills.ts`.
+**Decisão:** omitir `icon`. Mapear um ícone confiável (via `simple-icons`/`lucide-react`) para cada uma das ~65 skills listadas não é algo que dê para confirmar sem risco de usar o ícone errado, e não há pedido explícito nem critério de aceite que exija ícone por skill nesta sub-fase.
+**Consequência:** o destaque visual por categoria vem só de cor (ver próxima entrada) e tipografia; ícones por skill podem ser adicionados depois, sem mudar a estrutura de dados.
+
+## Skills (4.3): cor por categoria de destaque
+
+**Contexto:** seção 11 do documento original pede "uma cor de destaque por categoria de skill, sempre derivadas dos tokens do tema" — o mesmo princípio vale para as categorias do Tetris (Fase 5), ainda não implementado.
+**Decisão:** 4 novas variáveis CSS em `src/app/globals.css` (`--skill-frontend`, `--skill-backend`, `--skill-cloud`, `--skill-domain`), redefinidas no tema claro, todas validadas em ≥ 4.5:1 de contraste contra `--bg` e `--surface` nos dois temas. A categoria "IA aplicada" reaproveita `--accent` (mesma cor de destaque do site), em vez de uma quinta cor nova — reforça a narrativa de foco em IA aplicada.
+**Consequência:** essas variáveis ficam disponíveis para reuso nas peças do Tetris por categoria de skill (Fase 5), sem precisar de um novo sistema de cores nessa fase futura.

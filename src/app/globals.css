@@ -11,6 +11,11 @@
   --accent: #39d2c0;
   --accent-fg: #06201c;
 
+  --skill-frontend: #5b9dff;
+  --skill-backend: #e0b24a;
+  --skill-cloud: #b78cf0;
+  --skill-domain: #ef8a8a;
+
   --radius: 0.375rem;
   --content-max-width: 72rem;
   --section-padding-y: 5rem;
@@ -26,6 +31,11 @@
   --border: #d7dade;
   --accent: #0a6e64;
   --accent-fg: #f7f8fa;
+
+  --skill-frontend: #1f5fbf;
+  --skill-backend: #8a5f0d;
+  --skill-cloud: #6b3fa0;
+  --skill-domain: #b23a3a;
 }
 
 @theme inline {
@@ -36,6 +46,11 @@
   --color-border: var(--border);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-fg);
+
+  --color-skill-frontend: var(--skill-frontend);
+  --color-skill-backend: var(--skill-backend);
+  --color-skill-cloud: var(--skill-cloud);
+  --color-skill-domain: var(--skill-domain);
 
   --radius-sm: calc(var(--radius) - 0.125rem);
   --radius-md: var(--radius);

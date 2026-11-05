@@ -12,9 +12,12 @@ Nada nesta lista está publicado como fato no site. Itens resolvidos saem da lis
 - ~~Posso citar "OKTO Payments" e estes projetos nos estudos de caso?~~ → decidido: sim, os 4 estudos de caso foram aprovados e publicados em nível conceitual (`src/content/case-studies.ts`), seguindo as regras de confidencialidade do `CLAUDE.md`.
 - ~~Exibir ou não os números da seção 10.4 do documento original ("200+ PRs", "26 meses sem lacunas")~~ → decidido: não exibir, sem fonte confirmada; os estudos de caso usam só números já publicados em `src/content/profile.ts` (8 operadores, 15 códigos de inconsistência).
 
-## Abertos (afetam a Fase 4 — Skills, "Como trabalho", Contato)
+## Resolvidos (Fase 4.3)
 
-- Rótulo **Aplicado / Em estudo** de: Kubernetes, Helm/IRSA, RabbitMQ, Kafka, Bull, ElasticSearch, Metabase, Power BI, GraphQL, MySQL, Vue.js. Não aparecem nos 3 currículos de referência (exceto GitOps/Helm, GraphQL, MySQL, Vue.js, Playwright e Datadog, que aparecem no currículo "Engenheiro de Produto IA") — usar padrão provisório "Em estudo" até confirmação.
+- ~~Rótulo Aplicado/Em estudo das skills sem evidência direta nos currículos~~ → decidido: remover a distinção Aplicado/Em estudo da seção Skills (não exibida); todas as skills de segundo nível aparecem sem rótulo de nível em `src/content/skills.ts`.
+
+## Abertos (afetam a Fase 4 — "Como trabalho", Contato)
+
 - Certificações e cursos (ex.: Cod3r, 86h de Desenvolvimento Web Moderno).
 - Nível de inglês e espanhol.
 - Se já lecionou (para a seção "Como trabalho" / didática).

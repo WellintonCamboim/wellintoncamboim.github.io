@@ -19,6 +19,7 @@
     "experience": "Experiência",
     "caseStudies": "Estudos de caso",
     "projects": "Projetos",
+    "skills": "Skills",
     "education": "Formação",
     "contact": "Contato"
   },
@@ -52,6 +53,10 @@
     "stackLabel": "Stack",
     "repoLinkLabel": "Ver repositório",
     "inDevelopmentBadge": "Em desenvolvimento"
+  },
+  "skills": {
+    "heading": "Skills",
+    "secondaryHeading": "Outras tecnologias e práticas"
   },
   "education": {
     "heading": "Formação"
