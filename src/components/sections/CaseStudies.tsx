@@ -12,14 +12,14 @@ export function CaseStudies() {
     <section id="case-studies" className="scroll-mt-24 px-4 py-20">
       <div className="mx-auto max-w-[var(--content-max-width)]">
         <h2 className="mb-10 text-2xl font-semibold">{t("heading")}</h2>
-        <div className="grid gap-6 sm:grid-cols-2">
+        <div className="grid items-start gap-6 sm:grid-cols-2">
           {entries.map((entry) => (
             <details
               key={entry.title}
               className="group rounded-md border border-border bg-surface p-5 open:ring-1 open:ring-accent"
             >
               <summary className="flex cursor-pointer list-none items-start justify-between gap-3 font-mono text-lg font-medium text-foreground [&::-webkit-details-marker]:hidden">
-                <span>{entry.title}</span>
+                <span className="block min-h-[2lh]">{entry.title}</span>
                 <ChevronDown
                   aria-hidden="true"
                   className="mt-1 size-4 shrink-0 text-accent transition-transform group-open:rotate-180"
