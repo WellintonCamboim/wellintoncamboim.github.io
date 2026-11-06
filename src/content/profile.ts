@@ -37,7 +37,7 @@ export const experience: Record<Locale, ExperienceEntry[]> = {
         "Conduzi investigações e correções de segurança da informação.",
         "Participei de grupos de trabalho ligados a tecnologia e negócio, com elaboração de documentações técnicas e para os setores comercial e de produto.",
       ],
-      stack: "Node.js, React Native, PostgreSQL, MongoDB, AWS",
+      stack: "Node.js, Java, React Native, PostgreSQL, MongoDB, AWS",
     },
     {
       company: "Tentáculo.Digital",
@@ -45,11 +45,11 @@ export const experience: Record<Locale, ExperienceEntry[]> = {
       period: "jun/2020 – jun/2022",
       context: "Remoto · Software house.",
       highlights: [
-        "Atuei em produtos internos e em projetos de clientes, principalmente do setor financeiro, em front-end, mobile e back-end (React, Angular, React Native, Node.js, Java).",
+        "Atuei em produtos internos e em projetos de clientes, principalmente do setor financeiro, em back-end, front-end e mobile (Node.js, Java, React, Angular, React Native).",
         "Participei da construção de produtos do zero, com contato direto com clientes e stakeholders para levantamento e validação de requisitos.",
         "Testes de software, code review em pull requests, entendimento de regras de negócio e correção de bugs.",
       ],
-      stack: "React, Angular, React Native, Node.js, Java, MongoDB",
+      stack: "Node.js, Java, MongoDB, React, Angular, React Native",
     },
     {
       company: "Instituto Federal Catarinense (IFC)",
@@ -92,7 +92,7 @@ export const experience: Record<Locale, ExperienceEntry[]> = {
         "Led information-security investigations and fixes.",
         "Took part in cross-functional tech-and-business working groups, producing technical documentation as well as materials for the sales and product teams.",
       ],
-      stack: "Node.js, React Native, PostgreSQL, MongoDB, AWS",
+      stack: "Node.js, Java, React Native, PostgreSQL, MongoDB, AWS",
     },
     {
       company: "Tentáculo.Digital",
@@ -100,11 +100,11 @@ export const experience: Record<Locale, ExperienceEntry[]> = {
       period: "Jun 2020 – Jun 2022",
       context: "Remote · Software house.",
       highlights: [
-        "Worked on internal products and client projects, mostly in the financial sector, across front-end, mobile, and back-end (React, Angular, React Native, Node.js, Java).",
+        "Worked on internal products and client projects, mostly in the financial sector, across back-end, front-end, and mobile (Node.js, Java, React, Angular, React Native).",
         "Took part in building products from the ground up, working directly with clients and stakeholders to gather and validate requirements.",
         "Software testing, pull request code reviews, business rule analysis, and bug fixes.",
       ],
-      stack: "React, Angular, React Native, Node.js, Java, MongoDB",
+      stack: "Node.js, Java, MongoDB, React, Angular, React Native",
     },
     {
       company: "Instituto Federal Catarinense (IFC)",
@@ -147,7 +147,7 @@ export const experience: Record<Locale, ExperienceEntry[]> = {
         "Lideré investigaciones y correcciones de seguridad de la información.",
         "Participé en grupos de trabajo multidisciplinarios de tecnología y negocio, elaborando documentación técnica y materiales para los equipos comercial y de producto.",
       ],
-      stack: "Node.js, React Native, PostgreSQL, MongoDB, AWS",
+      stack: "Node.js, Java, React Native, PostgreSQL, MongoDB, AWS",
     },
     {
       company: "Tentáculo.Digital",
@@ -155,11 +155,11 @@ export const experience: Record<Locale, ExperienceEntry[]> = {
       period: "jun. 2020 – jun. 2022",
       context: "Remoto · Software house.",
       highlights: [
-        "Trabajé en productos internos y proyectos de clientes, principalmente del sector financiero, en front-end, mobile y back-end (React, Angular, React Native, Node.js, Java).",
+        "Trabajé en productos internos y proyectos de clientes, principalmente del sector financiero, en back-end, front-end y mobile (Node.js, Java, React, Angular, React Native).",
         "Participé en la construcción de productos desde cero, con contacto directo con clientes y stakeholders para el levantamiento y validación de requisitos.",
         "Pruebas de software, code review en pull requests, análisis de reglas de negocio y corrección de errores.",
       ],
-      stack: "React, Angular, React Native, Node.js, Java, MongoDB",
+      stack: "Node.js, Java, MongoDB, React, Angular, React Native",
     },
     {
       company: "Instituto Federal Catarinense (IFC)",

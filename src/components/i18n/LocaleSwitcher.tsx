@@ -81,7 +81,7 @@ export function LocaleSwitcher() {
             onClick={() => handleSelect(loc)}
             className={
               loc === locale
-                ? "flex items-center rounded-md p-1 ring-2 ring-accent ring-offset-1 ring-offset-background"
+                ? "flex items-center rounded-md p-1"
                 : "flex items-center rounded-md p-1 opacity-70 hover:opacity-100"
             }
           >

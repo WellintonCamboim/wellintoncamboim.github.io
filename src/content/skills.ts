@@ -17,14 +17,25 @@ export interface SecondaryGroup {
 export const highlightSkills: Record<Locale, HighlightGroup[]> = {
   pt: [
     {
-      id: "frontend",
-      name: "Front-end e mobile",
-      skills: ["TypeScript", "JavaScript", "React", "Vue.js", "Next.js", "React Native"],
-    },
-    {
       id: "backend",
       name: "Back-end e dados",
-      skills: ["Node.js", "Go", "PostgreSQL", "MongoDB", "Mongoose", "Prisma", "Redis"],
+      skills: [
+        "Node.js",
+        "Go",
+        "Java",
+        "Spring Boot",
+        "PostgreSQL",
+        "MongoDB",
+        "Mongoose",
+        "Prisma",
+        "Spring Data JPA / Hibernate",
+        "Redis",
+      ],
+    },
+    {
+      id: "frontend",
+      name: "Front-end e mobile",
+      skills: ["TypeScript", "JavaScript", "React", "Angular", "Vue.js", "Next.js", "React Native"],
     },
     {
       id: "cloud",
@@ -53,14 +64,25 @@ export const highlightSkills: Record<Locale, HighlightGroup[]> = {
   ],
   en: [
     {
-      id: "frontend",
-      name: "Front-end and mobile",
-      skills: ["TypeScript", "JavaScript", "React", "Vue.js", "Next.js", "React Native"],
-    },
-    {
       id: "backend",
       name: "Back-end and data",
-      skills: ["Node.js", "Go", "PostgreSQL", "MongoDB", "Mongoose", "Prisma", "Redis"],
+      skills: [
+        "Node.js",
+        "Go",
+        "Java",
+        "Spring Boot",
+        "PostgreSQL",
+        "MongoDB",
+        "Mongoose",
+        "Prisma",
+        "Spring Data JPA / Hibernate",
+        "Redis",
+      ],
+    },
+    {
+      id: "frontend",
+      name: "Front-end and mobile",
+      skills: ["TypeScript", "JavaScript", "React", "Angular", "Vue.js", "Next.js", "React Native"],
     },
     {
       id: "cloud",
@@ -89,14 +111,25 @@ export const highlightSkills: Record<Locale, HighlightGroup[]> = {
   ],
   es: [
     {
-      id: "frontend",
-      name: "Front-end y mobile",
-      skills: ["TypeScript", "JavaScript", "React", "Vue.js", "Next.js", "React Native"],
-    },
-    {
       id: "backend",
       name: "Back-end y datos",
-      skills: ["Node.js", "Go", "PostgreSQL", "MongoDB", "Mongoose", "Prisma", "Redis"],
+      skills: [
+        "Node.js",
+        "Go",
+        "Java",
+        "Spring Boot",
+        "PostgreSQL",
+        "MongoDB",
+        "Mongoose",
+        "Prisma",
+        "Spring Data JPA / Hibernate",
+        "Redis",
+      ],
+    },
+    {
+      id: "frontend",
+      name: "Front-end y mobile",
+      skills: ["TypeScript", "JavaScript", "React", "Angular", "Vue.js", "Next.js", "React Native"],
     },
     {
       id: "cloud",
@@ -130,7 +163,7 @@ export const secondarySkills: Record<Locale, SecondaryGroup[]> = {
     {
       id: "testing",
       name: "Testes e qualidade",
-      skills: ["Vitest", "Jest", "Supertest", "Testing Library", "Playwright"],
+      skills: ["Vitest", "Jest", "Supertest", "Testing Library", "Playwright", "JUnit", "Mockito"],
     },
     {
       id: "api-security",
@@ -140,7 +173,7 @@ export const secondarySkills: Record<Locale, SecondaryGroup[]> = {
     {
       id: "infra",
       name: "Infraestrutura",
-      skills: ["Docker", "Nginx", "Kubernetes", "Helm", "IRSA", "GitHub Actions", "GitOps"],
+      skills: ["Docker", "Nginx", "Kubernetes", "Helm", "IRSA", "GitHub Actions", "GitOps", "Maven"],
     },
     {
       id: "data-messaging",
@@ -176,7 +209,7 @@ export const secondarySkills: Record<Locale, SecondaryGroup[]> = {
     {
       id: "testing",
       name: "Testing and quality",
-      skills: ["Vitest", "Jest", "Supertest", "Testing Library", "Playwright"],
+      skills: ["Vitest", "Jest", "Supertest", "Testing Library", "Playwright", "JUnit", "Mockito"],
     },
     {
       id: "api-security",
@@ -186,7 +219,7 @@ export const secondarySkills: Record<Locale, SecondaryGroup[]> = {
     {
       id: "infra",
       name: "Infrastructure",
-      skills: ["Docker", "Nginx", "Kubernetes", "Helm", "IRSA", "GitHub Actions", "GitOps"],
+      skills: ["Docker", "Nginx", "Kubernetes", "Helm", "IRSA", "GitHub Actions", "GitOps", "Maven"],
     },
     {
       id: "data-messaging",
@@ -222,7 +255,7 @@ export const secondarySkills: Record<Locale, SecondaryGroup[]> = {
     {
       id: "testing",
       name: "Pruebas y calidad",
-      skills: ["Vitest", "Jest", "Supertest", "Testing Library", "Playwright"],
+      skills: ["Vitest", "Jest", "Supertest", "Testing Library", "Playwright", "JUnit", "Mockito"],
     },
     {
       id: "api-security",
@@ -232,7 +265,7 @@ export const secondarySkills: Record<Locale, SecondaryGroup[]> = {
     {
       id: "infra",
       name: "Infraestructura",
-      skills: ["Docker", "Nginx", "Kubernetes", "Helm", "IRSA", "GitHub Actions", "GitOps"],
+      skills: ["Docker", "Nginx", "Kubernetes", "Helm", "IRSA", "GitHub Actions", "GitOps", "Maven"],
     },
     {
       id: "data-messaging",
