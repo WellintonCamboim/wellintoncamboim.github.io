@@ -110,6 +110,18 @@ ADRs curtos. Um bloco por decisão, mais recente no topo.
 **Decisão:** atualizar `stack` para "Python, LangChain, Anthropic SDK" nas 3 línguas — mesma fonte verificável (repositório público) já usada para o conteúdo do `catalog-ai`, não é conteúdo inventado.
 **Consequência:** este projeto é, hoje, a única evidência direta e confirmada de uso de LangChain (o `catalog-ai` declara explicitamente o contrário no próprio README).
 
+## Tetris (5.3): peças reaproveitam as 5 cores de categoria do Skills, não as 7 da seção 8
+
+**Contexto:** a seção 8 do documento original pede uma cor por "categoria de skill" nas peças do Tetris, listando 7 categorias (front-end, back-end, dados, cloud, IA, segurança, mobile). Mas a ADR "Skills (4.3): cor por categoria de destaque" já tinha decidido, de propósito, só 5 variáveis CSS (`--skill-frontend`, `--skill-backend`, `--skill-cloud`, `--skill-domain`, mais `--accent` para IA) e já registrou a consequência de que "essas variáveis ficam disponíveis para reuso nas peças do Tetris... sem precisar de um novo sistema de cores nessa fase futura". As 7 categorias do brief também não correspondem 1:1 às 5 categorias de destaque do `skills.ts` atual (frontend, backend, cloud, ai, domain) — "segurança" e "mobile" não existem como categoria separada hoje, e "domínio" (PIX/tesouraria) não está na lista de 7 do brief.
+**Decisão:** `PIECE_CATEGORY` em `src/lib/tetris/renderer.ts` mapeia os 7 tipos de peça (`I,O,T,S,Z,J,L`) para as 5 categorias já existentes: `I`/`L` → frontend, `O`/`J` → backend (as duas maiores categorias do Skills, com 2 peças cada), `T` → cloud, `S` → ai, `Z` → domain. É um mapeamento arbitrário (não há correspondência "correta" entre forma da peça e categoria), mas resolve a pendência sem introduzir paleta nova.
+**Consequência:** o painel do Tetris usa exatamente a mesma paleta por categoria que a seção Skills, reforçando a mesma linguagem visual em vez de um sistema de cores paralelo. Se o usuário quiser 7 cores distintas no futuro, isso exige 2 novas variáveis CSS (`--skill-security`, `--skill-mobile`) validadas em contraste AA nos dois temas — não implementado agora por não ter sido pedido explicitamente.
+
+## Tetris (5.3): `renderer.ts` sem testes de desenho real (sem canvas no ambiente de teste)
+
+**Contexto:** a seção 8 só pede testes Vitest explícitos para `engine.ts` e `ai.ts` ("sem canvas"); o projeto não tem `jsdom`/polyfill de `CanvasRenderingContext2D` instalado, e adicionar um só para testar chamadas de desenho (`fillRect`, `arcTo`...) não traria garantia real sobre o resultado visual.
+**Decisão:** só a lógica pura de `renderer.ts` tem teste (`renderer.test.ts`): o mapeamento peça→categoria (`PIECE_CATEGORY`/`pieceColorVar`) e a geometria de célula (`cellRect`). As funções que recebem `CanvasRenderingContext2D` (`drawBoard`, `drawActivePiece`, `renderFrame`) ficam sem teste automatizado, cobertas por verificação visual manual na integração com o Hero (Fase 5.4).
+**Consequência:** `readTheme()` depende do DOM (`getComputedStyle`) e também não é testada via Vitest; qualquer regressão de cor por tema precisa ser verificada no navegador, não no CI.
+
 ## Tetris (5.2): bot heurístico busca por hard-drop virtual, sem simular o caminho
 
 **Contexto:** a seção 8 do documento pede que o bot "simule todas as rotações e colunas, faça o hard drop virtual e pontue cada posição" com a heurística `score = -0.51·alturaAgregada + 0.76·linhasCompletas − 0.36·buracos − 0.18·irregularidade`. O `engine.ts` (5.1) não tem wall kicks e só valida posições já dadas — não existe uma função pronta para "toda coluna alcançável a partir do spawn".
