@@ -110,6 +110,12 @@ ADRs curtos. Um bloco por decisão, mais recente no topo.
 **Decisão:** atualizar `stack` para "Python, LangChain, Anthropic SDK" nas 3 línguas — mesma fonte verificável (repositório público) já usada para o conteúdo do `catalog-ai`, não é conteúdo inventado.
 **Consequência:** este projeto é, hoje, a única evidência direta e confirmada de uso de LangChain (o `catalog-ai` declara explicitamente o contrário no próprio README).
 
+## Tetris (5.2): bot heurístico busca por hard-drop virtual, sem simular o caminho
+
+**Contexto:** a seção 8 do documento pede que o bot "simule todas as rotações e colunas, faça o hard drop virtual e pontue cada posição" com a heurística `score = -0.51·alturaAgregada + 0.76·linhasCompletas − 0.36·buracos − 0.18·irregularidade`. O `engine.ts` (5.1) não tem wall kicks e só valida posições já dadas — não existe uma função pronta para "toda coluna alcançável a partir do spawn".
+**Decisão:** `findBestMove` em `src/lib/tetris/ai.ts` testa as 4 rotações em cada coluna candidata usando uma sonda em `y` bem acima do tabuleiro (`PROBE_Y = -BOARD_HEIGHT`) — nessa altura, `isValidPosition` só pode reprovar por limite horizontal (nunca por colisão com a pilha, já que toda célula cai em `y < 0`), então a sonda isola exatamente a legalidade de coluna/rotação. A partir daí, `hardDropPosition` simula a queda real. Isso aproxima "toda coluna alcançável", sem reimplementar movimento lateral turno a turno — consistente com a ADR de 5.1 (o bot já não depende de girar peças encostadas em paredes).
+**Consequência:** empates de pontuação são resolvidos pela ordem de iteração (rotação 0→3, coluna da esquerda para a direita) — determinístico, mas arbitrário; não há preferência explícita por "coluna mais à esquerda" como regra de design, é só consequência da busca. `countHoles`/`scorePlacement` ficam exportados por serem úteis tanto para o `ai.test.ts` quanto para o futuro `renderer.ts`/depuração.
+
 ## Tetris (5.1): rotação sem wall kicks
 
 **Contexto:** a seção 8 do documento pede "rotação" como uma das responsabilidades do `engine.ts`, sem exigir explicitamente o sistema SRS completo (com tabelas de wall kick). Implementar wall kicks corretos exigiria tabelas de offset por peça e por transição de rotação, sem ganho perceptível para um Tetris que só joga sozinho (o bot já simula todas as colunas e rotações possíveis antes de decidir, em vez de girar peças já posicionadas perto de paredes).
