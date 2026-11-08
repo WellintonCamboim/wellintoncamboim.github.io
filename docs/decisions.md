@@ -2,6 +2,18 @@
 
 ADRs curtos. Um bloco por decisão, mais recente no topo.
 
+## SEO (6.1): favicon gerado por código em vez de esperar a imagem de perfil
+
+**Contexto:** o site não tinha nenhum favicon; a imagem de perfil (seção 16, pergunta 6 do documento original) continua `TODO(wellinton)` em `content/_todo.md`, sem previsão.
+**Decisão:** `src/app/icon.tsx` usa `ImageResponse` (`next/og`) para gerar um ícone 32x32 em código — fundo `--bg` escuro, "W" em `--accent` — em vez de esperar a foto ou inventar uma logo. Fica num arquivo na raiz de `src/app/` (fora de `(root)/` e `[locale]/`) porque o projeto tem duas raízes de layout independentes (ADR "i18n sem middleware") e um `icon.tsx` ali se aplica às duas.
+**Consequência:** favicon final e funcional hoje; se/quando a imagem de perfil for confirmada, trocar por algo baseado nela é uma mudança isolada neste arquivo, sem efeito em outro lugar.
+
+## SEO (6.1): `siteUrl` centralizado em `content/links.ts`, não mais hardcoded em `sitemap.ts`
+
+**Contexto:** `sitemap.ts` já tinha `https://wellintoncamboim.github.io` hardcoded; a Fase 6 precisa do mesmo valor em `robots.ts` e no `metadataBase` do layout (para resolver canonical e, na 6.2, a imagem de Open Graph).
+**Decisão:** o valor passa a viver em `src/content/links.ts` (`siteUrl`), ao lado dos outros links do site; os três consumidores importam de lá.
+**Consequência:** nenhuma, é só remoção de duplicação antes que ela se espalhasse para um terceiro/quarto arquivo.
+
 ## Menu mobile do Header: dropdown de disclosure, não um drawer tela-cheia
 
 **Contexto:** uma auditoria de usabilidade encontrou que a `<nav>` do Header (`hidden ... sm:flex`) não tinha nenhum substituto no mobile — abaixo do breakpoint `sm`, não havia forma de navegar entre seções pelo cabeçalho.

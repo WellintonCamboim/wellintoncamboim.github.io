@@ -1,11 +1,19 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { IBM_Plex_Mono, Inter } from "next/font/google";
 import { notFound } from "next/navigation";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import { siteUrl } from "@/content/links";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#0b0e11" },
+    { media: "(prefers-color-scheme: light)", color: "#f7f8fa" },
+  ],
+};
 
 const inter = Inter({
   subsets: ["latin"],
@@ -35,7 +43,9 @@ export async function generateMetadata({
   return {
     title: t("siteTitle"),
     description: t("siteDescription"),
+    metadataBase: new URL(siteUrl),
     alternates: {
+      canonical: `/${locale}/`,
       languages: {
         pt: "/pt/",
         en: "/en/",
