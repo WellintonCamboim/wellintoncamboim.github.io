@@ -257,12 +257,23 @@ export function TetrisCanvas() {
 
   return (
     <div ref={containerRef} className="relative size-full">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-15">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-15 [container-type:size]"
+      >
+        {/* `object-fit` has no effect on <canvas> in Chromium (accepted by
+            CSS, ignored when painting) — contain-fit has to come from the
+            box's own size instead. `aspect-[1/2]` matches
+            BOARD_WIDTH:BOARD_HEIGHT; `min(100cqw,50cqh)` is the same
+            width-vs-height-bound contain-fit math resize() below does in
+            JS, done in CSS so it's already correct on first paint (see
+            "Tetris (5.3)" decision in docs/decisions.md for the 6.3 CLS
+            fix history). */}
         <canvas
           ref={canvasRef}
           width={BOARD_WIDTH}
           height={BOARD_HEIGHT}
-          className="block size-full rounded-lg object-contain"
+          className="block aspect-[1/2] w-[min(100cqw,50cqh)] rounded-lg"
         />
       </div>
       <button
