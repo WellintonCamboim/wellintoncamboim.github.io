@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Pause, Play } from "lucide-react";
 import {
@@ -32,6 +32,15 @@ const MAX_CELL_SIZE = 48;
 // board instead of an empty one (section 8: "quadro estático bonito").
 const STATIC_PREVIEW_STEPS = 600;
 
+// Picks a fresh raster resolution (resize() below) synchronously before
+// the browser paints, instead of after — avoids a one-frame flash of the
+// previous resolution on viewport/orientation changes. Doesn't affect the
+// canvas's CSS box size (fixed by markup, see the JSX below), which is
+// what Lighthouse's CLS 0.409 (6.3) actually came from. SSR has no layout
+// to measure, so this falls back to useEffect there to avoid React's
+// "useLayoutEffect does nothing on the server" warning.
+const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
 export function TetrisCanvas() {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -45,7 +54,7 @@ export function TetrisCanvas() {
   const [manualOverride, setManualOverride] = useState<boolean | null>(null);
   const paused = manualOverride ?? prefersReducedMotion;
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const containerEl = containerRef.current;
     const canvasEl = canvasRef.current;
     if (!containerEl || !canvasEl) return;
@@ -91,19 +100,23 @@ export function TetrisCanvas() {
 
     function resize() {
       const dpr = window.devicePixelRatio || 1;
-      // Contain-fit within whatever box the caller gives this component —
-      // a small centered panel (width-constrained, height 0/auto) and a
-      // full-bleed backdrop (both dimensions constrained) both work.
+      // The canvas's CSS box is pinned to the container's full size from
+      // the server-rendered markup (`size-full` + `object-contain` below,
+      // with a 1:2 `width`/`height` attribute default) — that's what the
+      // browser paints before any JS runs, so there's nothing to correct
+      // into place here and no layout shift (CLS) once this runs. This
+      // only picks a raster resolution close to the box's actual rendered
+      // size, for crispness; `object-contain` does the letterboxing.
       const widthBasedSize = container.clientWidth / BOARD_WIDTH;
       const heightBasedSize =
         container.clientHeight > 0 ? container.clientHeight / BOARD_HEIGHT : Infinity;
       cellSize = Math.max(MIN_CELL_SIZE, Math.min(MAX_CELL_SIZE, widthBasedSize, heightBasedSize));
       const cssWidth = cellSize * BOARD_WIDTH;
       const cssHeight = cellSize * BOARD_HEIGHT;
-      canvas.style.width = `${cssWidth}px`;
-      canvas.style.height = `${cssHeight}px`;
-      // Resizing width/height resets the canvas's transform, so this must
-      // run again every time — it's not a one-off setup step.
+      // Changing width/height resets the canvas's transform, so this must
+      // run again every time — it's not a one-off setup step. Both keep
+      // the same BOARD_WIDTH:BOARD_HEIGHT ratio as the JSX defaults below,
+      // so `object-contain`'s letterboxing never jumps when this fires.
       canvas.width = Math.round(cssWidth * dpr);
       canvas.height = Math.round(cssHeight * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -244,11 +257,13 @@ export function TetrisCanvas() {
 
   return (
     <div ref={containerRef} className="relative size-full">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-15"
-      >
-        <canvas ref={canvasRef} className="block rounded-lg" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-15">
+        <canvas
+          ref={canvasRef}
+          width={BOARD_WIDTH}
+          height={BOARD_HEIGHT}
+          className="block size-full rounded-lg object-contain"
+        />
       </div>
       <button
         type="button"
