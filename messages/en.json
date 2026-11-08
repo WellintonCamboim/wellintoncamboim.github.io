@@ -13,6 +13,10 @@
     "toggleToLight": "Switch to light theme",
     "toggleToDark": "Switch to dark theme"
   },
+  "tetris": {
+    "pause": "Pause the Tetris animation",
+    "resume": "Resume the Tetris animation"
+  },
   "nav": {
     "skipToContent": "Skip to content",
     "about": "About",

@@ -14,7 +14,7 @@ export function Hero() {
       id="top"
       className="relative flex min-h-screen flex-col items-center justify-center gap-6 overflow-hidden px-4 pt-20 text-center"
     >
-      <div aria-hidden="true" className="absolute inset-0 z-0 opacity-15">
+      <div className="absolute inset-0 z-0">
         <TetrisCanvas />
       </div>
       <div className="relative z-10 flex flex-col items-center gap-6">

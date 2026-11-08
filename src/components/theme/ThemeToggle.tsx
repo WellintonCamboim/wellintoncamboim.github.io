@@ -1,19 +1,9 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
 import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 import { Moon, Sun } from "lucide-react";
-
-const subscribe = () => () => {};
-
-function useHydrated() {
-  return useSyncExternalStore(
-    subscribe,
-    () => true,
-    () => false,
-  );
-}
+import { useHydrated } from "@/lib/hooks/useHydrated";
 
 export function ThemeToggle() {
   const t = useTranslations("theme");

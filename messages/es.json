@@ -13,6 +13,10 @@
     "toggleToLight": "Activar tema claro",
     "toggleToDark": "Activar tema oscuro"
   },
+  "tetris": {
+    "pause": "Pausar la animación del Tetris",
+    "resume": "Reanudar la animación del Tetris"
+  },
   "nav": {
     "skipToContent": "Saltar al contenido",
     "about": "Sobre mí",

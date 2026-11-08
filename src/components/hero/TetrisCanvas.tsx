@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
+import { Pause, Play } from "lucide-react";
 import {
   BOARD_HEIGHT,
   BOARD_WIDTH,
@@ -14,6 +16,8 @@ import {
   type RenderTheme,
   type TetrisSession,
 } from "@/lib/tetris";
+import { useHydrated } from "@/lib/hooks/useHydrated";
+import { usePrefersReducedMotion } from "@/lib/hooks/usePrefersReducedMotion";
 
 // One grid action (rotate, slide one column, or fall one row) per tick —
 // human-paced, not instant, per session.ts's step(). See docs/decisions.md,
@@ -23,10 +27,23 @@ const LINE_CLEAR_DURATION_MS = 320;
 const DISSOLVE_DURATION_MS = 700;
 const MIN_CELL_SIZE = 10;
 const MAX_CELL_SIZE = 48;
+// Enough synchronous step() calls to lock a handful of pieces before the
+// first paint, so the prefers-reduced-motion static frame shows a settled
+// board instead of an empty one (section 8: "quadro estático bonito").
+const STATIC_PREVIEW_STEPS = 600;
 
 export function TetrisCanvas() {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  // Bridges the click handler below to the imperative loop set up inside
+  // the mount effect, without tearing the session down on every toggle.
+  const setRunningRef = useRef<(running: boolean) => void>(() => {});
+
+  const t = useTranslations("tetris");
+  const hydrated = useHydrated();
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const [manualOverride, setManualOverride] = useState<boolean | null>(null);
+  const paused = manualOverride ?? prefersReducedMotion;
 
   useEffect(() => {
     const containerEl = containerRef.current;
@@ -54,6 +71,23 @@ export function TetrisCanvas() {
     let lineClearElapsed = 0;
     let dissolving = false;
     let dissolveElapsed = 0;
+
+    // Starts running; the effect below (driven by the `paused` prop, which
+    // already accounts for prefers-reduced-motion) corrects this right
+    // after mount via setRunningRef, in the same effect flush.
+    let manuallyPaused = false;
+    let tabHidden = document.hidden;
+    let offscreen = false;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      for (let i = 0; i < STATIC_PREVIEW_STEPS; i++) {
+        const result = step(session);
+        session = result.session;
+        if (result.event.type === "toppedOut") {
+          session = resetAfterDissolve(session);
+        }
+      }
+    }
 
     function resize() {
       const dpr = window.devicePixelRatio || 1;
@@ -140,8 +174,22 @@ export function TetrisCanvas() {
       rafId = null;
     }
 
+    // Three independent reasons to not be running — manual pause,
+    // backgrounded tab, and off-screen — combined so that, e.g., coming
+    // back into the viewport never overrides a manual pause.
+    function evaluateRunning() {
+      if (!manuallyPaused && !tabHidden && !offscreen) startLoop();
+      else stopLoop();
+    }
+
+    setRunningRef.current = (running) => {
+      manuallyPaused = !running;
+      evaluateRunning();
+    };
+
     resize();
     draw();
+    evaluateRunning();
 
     // Keeps the canvas crisp (devicePixelRatio) and correctly sized as the
     // hero's layout responds to viewport width.
@@ -151,13 +199,10 @@ export function TetrisCanvas() {
     });
     resizeObserver.observe(container);
 
-    // Only runs the rAF loop while the board is actually on screen — the
-    // accessible pause control, reduced-motion handling, and the
-    // document.hidden case are 5.5's job (see docs/decisions.md).
     const intersectionObserver = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) startLoop();
-        else stopLoop();
+        offscreen = !entry.isIntersecting;
+        evaluateRunning();
       },
       { threshold: 0.1 },
     );
@@ -174,17 +219,51 @@ export function TetrisCanvas() {
       attributeFilter: ["data-theme"],
     });
 
+    function handleVisibilityChange() {
+      tabHidden = document.hidden;
+      evaluateRunning();
+    }
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
     return () => {
       stopLoop();
       resizeObserver.disconnect();
       intersectionObserver.disconnect();
       themeObserver.disconnect();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, []);
 
+  // Applies the pause button's state (which already folds in
+  // prefers-reduced-motion as its initial default) to the loop set up
+  // above. Runs once more right after mount, in the same effect flush as
+  // the effect above, correcting the "starts running" default when needed.
+  useEffect(() => {
+    setRunningRef.current(!paused);
+  }, [paused]);
+
   return (
-    <div ref={containerRef} className="flex size-full items-center justify-center">
-      <canvas ref={canvasRef} aria-hidden="true" className="pointer-events-none block rounded-lg" />
+    <div ref={containerRef} className="relative size-full">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-15"
+      >
+        <canvas ref={canvasRef} className="block rounded-lg" />
+      </div>
+      <button
+        type="button"
+        onClick={() => setManualOverride(!paused)}
+        aria-pressed={hydrated && paused}
+        aria-label={paused ? t("resume") : t("pause")}
+        className="absolute right-3 bottom-3 z-20 inline-flex size-9 items-center justify-center rounded-md border border-border bg-surface text-foreground transition-colors hover:bg-surface/80"
+      >
+        {hydrated &&
+          (paused ? (
+            <Play aria-hidden="true" className="size-4" />
+          ) : (
+            <Pause aria-hidden="true" className="size-4" />
+          ))}
+      </button>
     </div>
   );
 }
