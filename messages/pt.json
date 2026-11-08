@@ -26,7 +26,10 @@
     "skills": "Skills",
     "workingStyle": "Como trabalho",
     "education": "Formação",
-    "contact": "Contato"
+    "contact": "Contato",
+    "openMenu": "Abrir menu de navegação",
+    "closeMenu": "Fechar menu de navegação",
+    "mobileMenuLabel": "Navegação"
   },
   "hero": {
     "name": "Wellinton Camboim",

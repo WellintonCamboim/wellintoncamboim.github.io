@@ -2,6 +2,12 @@
 
 ADRs curtos. Um bloco por decisão, mais recente no topo.
 
+## Menu mobile do Header: dropdown de disclosure, não um drawer tela-cheia
+
+**Contexto:** uma auditoria de usabilidade encontrou que a `<nav>` do Header (`hidden ... sm:flex`) não tinha nenhum substituto no mobile — abaixo do breakpoint `sm`, não havia forma de navegar entre seções pelo cabeçalho.
+**Decisão:** `MobileNav.tsx` abre um painel simples (`<nav>` com uma lista de links) logo abaixo do `<header>` (que já é `fixed`, então serve de contexto de posicionamento para o `absolute inset-x-0 top-full` do painel, sem precisar de wrapper extra) — não um drawer tela-cheia com overlay/trava de scroll. É o padrão ARIA "Disclosure" (botão com `aria-expanded`/`aria-controls` revelando conteúdo adjacente), não um widget de menu completo (`role="menu"`/`menuitem`) — semântica HTML nativa (`nav > ul > li > a`) é suficiente e mais robusta aqui do que recriar os papéis/teclado de um menu ARIA para uma lista de 8 links. Fecha ao clicar fora (`pointerdown` fora do contêiner), com Esc, ou ao clicar num link. A lista de seções foi extraída para `src/components/layout/nav-items.ts` e reaproveitada pelo nav desktop do próprio `Header.tsx`, para não ter a mesma lista de 8 itens duplicada em dois lugares.
+**Consequência:** não há foco preso (focus trap) nem bloqueio de scroll do body — aceitável para um painel pequeno que não cobre a tela toda; se o menu crescer a ponto de precisar de um drawer real, essas duas faltas precisam ser revisitadas.
+
 ## Tetris (5.5): um único botão de pausar/retomar, com `prefers-reduced-motion` como seu valor inicial — não um terceiro estado separado
 
 **Contexto:** a seção 8 pede três coisas que parecem independentes: botão de pausar/retomar, quadro estático sob `prefers-reduced-motion: reduce`, e pausa quando a aba está oculta ou o canvas sai da viewport (esta última já parcialmente coberta pelo `IntersectionObserver` da 5.4, só por desempenho). Tratar cada uma como um estado booleano próprio (`manualPaused`, `reducedMotionPaused`, `tabHidden`, `offscreen`) multiplicaria as combinações a considerar (ex.: o que mostrar se o usuário clicou "play" mas a aba está oculta?).

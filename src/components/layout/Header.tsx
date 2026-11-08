@@ -1,5 +1,7 @@
 import { useTranslations } from "next-intl";
 import { LocaleSwitcher } from "@/components/i18n/LocaleSwitcher";
+import { MobileNav } from "@/components/layout/MobileNav";
+import { NAV_ITEMS } from "@/components/layout/nav-items";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 export function Header() {
@@ -20,34 +22,20 @@ export function Header() {
             {common("siteTitle")}
           </a>
           <nav className="hidden items-center gap-6 text-sm sm:flex">
-            <a href="#about" className="text-muted-foreground hover:text-foreground">
-              {t("about")}
-            </a>
-            <a href="#experience" className="text-muted-foreground hover:text-foreground">
-              {t("experience")}
-            </a>
-            <a href="#case-studies" className="text-muted-foreground hover:text-foreground">
-              {t("caseStudies")}
-            </a>
-            <a href="#projects" className="text-muted-foreground hover:text-foreground">
-              {t("projects")}
-            </a>
-            <a href="#skills" className="text-muted-foreground hover:text-foreground">
-              {t("skills")}
-            </a>
-            <a href="#working-style" className="text-muted-foreground hover:text-foreground">
-              {t("workingStyle")}
-            </a>
-            <a href="#education" className="text-muted-foreground hover:text-foreground">
-              {t("education")}
-            </a>
-            <a href="#contact" className="text-muted-foreground hover:text-foreground">
-              {t("contact")}
-            </a>
+            {NAV_ITEMS.map((item) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                className="text-muted-foreground hover:text-foreground"
+              >
+                {t(item.key)}
+              </a>
+            ))}
           </nav>
           <div className="flex items-center gap-3">
             <LocaleSwitcher />
             <ThemeToggle />
+            <MobileNav />
           </div>
         </div>
       </header>

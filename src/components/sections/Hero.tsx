@@ -17,10 +17,12 @@ export function Hero() {
       <div className="absolute inset-0 z-0">
         <TetrisCanvas />
       </div>
-      <div className="relative z-10 flex flex-col items-center gap-6">
-        <p className="font-mono text-sm text-accent">{t("role")}</p>
-        <h1 className="text-4xl font-bold sm:text-5xl">{t("name")}</h1>
-        <p className="max-w-2xl text-muted-foreground">{t("tagline")}</p>
+      <div className="relative z-10 flex flex-col items-center gap-7">
+        <p className="font-mono text-base font-medium tracking-wide text-accent sm:text-lg">
+          {t("role")}
+        </p>
+        <h1 className="text-5xl font-bold tracking-tight sm:text-6xl">{t("name")}</h1>
+        <p className="max-w-2xl text-lg text-muted-foreground sm:text-xl">{t("tagline")}</p>
         <div className="flex items-center gap-4">
           <a
             href={siteLinks.github}
