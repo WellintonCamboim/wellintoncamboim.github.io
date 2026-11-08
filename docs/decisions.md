@@ -2,6 +2,18 @@
 
 ADRs curtos. Um bloco por decisão, mais recente no topo.
 
+## Deploy (Fase 7): `.nojekyll` via `public/`; 404 útil com seu próprio layout raiz
+
+**Contexto:** o site precisa de `.nojekyll` na raiz do site publicado (senão o GitHub Pages processa o conteúdo como Jekyll e ignora pastas com `_`, quebrando `_next/` inteiro) e de um `404.html` útil (seção 3 do documento original). O projeto não tem uma pasta `public/` ainda; o `out/404.html` gerado era o padrão genérico do Next (só em inglês, sem links).
+**Decisão:** `.nojekyll` vazio em `public/.nojekyll` — o `next build` já copia tudo de `public/` para a raiz do `out/` automaticamente, sem precisar de um passo extra no workflow (`touch`/`cp`) nem de lógica condicional. Pro 404, `src/app/not-found.tsx` virou um terceiro layout raiz independente (`<html>`/`<body>` próprios, mesmo padrão de `(root)/layout.tsx` — ver ADR "i18n sem middleware"), já que fica fora dos dois grupos de rota existentes e um 404 pode acontecer em qualquer caminho, sem locale conhecido. Reaproveita `languageChooserCopy.names`/`navLabel` de `src/content/language-chooser.ts` e ganha seu próprio `src/content/not-found.ts` com a mesma exceção de cópia fixa trilíngue (justificada pela mesma razão da página `/`: roda antes do locale ser conhecido).
+**Consequência:** três layouts raiz independentes agora (`(root)`, `[locale]`, e o `not-found.tsx` do nível raiz), cada um com seu próprio `<html>`/`<body>`; nenhum deles usa `ThemeProvider`/fontes via `next/font` (mesma limitação que já existia em `(root)/layout.tsx` — tema e tipografia da marca só entram depois que o locale é conhecido).
+
+## Deploy (Fase 7): workflow com `actions/configure-pages` + `upload-pages-artifact` + `deploy-pages`
+
+**Contexto:** só existia `.github/workflows/ci.yml` (lint/typecheck/test/build); faltava o workflow de deploy em si (seção 3 do documento original).
+**Decisão:** `.github/workflows/deploy.yml`, disparado em push na `main` (+ `workflow_dispatch` manual), com dois jobs (`build` e `deploy`, o segundo com `environment: github-pages` — é o que faz o GitHub mostrar a URL publicada no PR/Actions). Permissões mínimas no nível do workflow (`contents: read`, `pages: write`, `id-token: write`). Actions oficiais fixadas em tag major (`@v4`/`@v5`/`@v3`), mesmo padrão já usado em `ci.yml` (não por SHA — o documento original aceita qualquer uma das duas, e manter os dois workflows no mesmo estilo evita inconsistência). `concurrency` com `cancel-in-progress: false` — um deploy em andamento nunca é cancelado por um push seguinte, só a fila de pendentes.
+**Consequência:** ainda falta o usuário trocar **Settings → Pages → Source** para "GitHub Actions" no repositório (só dá pra fazer pela UI do GitHub); até lá, o workflow pode até rodar mas o Pages não vai servir o resultado.
+
 ## Polimento (6.3): Lighthouse local via Chromium do Playwright; CLS real encontrado e corrigido no Tetris
 
 **Contexto:** a 6.1 tinha deixado o Lighthouse local sem rodar (Chrome headless com timeouts de protocolo). Não há Chrome/Chromium instalado no ambiente (WSL); existe, porém, o Chromium que o Playwright já baixa para seu próprio cache (`~/.cache/ms-playwright/chromium-*/chrome-linux64/chrome`).
