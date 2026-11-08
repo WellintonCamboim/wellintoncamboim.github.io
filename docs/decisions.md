@@ -2,6 +2,18 @@
 
 ADRs curtos. Um bloco por decisão, mais recente no topo.
 
+## SEO (6.2): imagem de Open Graph sem carregar a fonte da marca
+
+**Contexto:** `next/og`'s `ImageResponse` (usado em `opengraph-image.tsx`) só aceita fontes em TTF/OTF — a API de fontes do Google serve WOFF2 por padrão para qualquer user-agent moderno; o "truque" usual pra conseguir um TTF de lá é mandar um user-agent de navegador antigo, um comportamento não documentado oficialmente e que pode mudar sem aviso.
+**Decisão:** a imagem gerada usa a fonte padrão do Satori (não IBM Plex Mono/Inter), carregando identidade visual só por cor (`--bg`, `--accent`, `--fg`, `--muted-fg`) e peso de fonte, não pela tipografia exata. Verificado visualmente nos 3 idiomas (pt/en/es, incluindo acentos) — legível e com bom contraste.
+**Consequência:** se o usuário quiser a tipografia da marca na imagem depois, dá pra buscar o TTF de um user-agent antigo (frágil) ou comitar o arquivo de fonte no repositório (mais robusto, build sem depender de rede) — não feito agora por ser complexidade desproporcional ao pedido original ("Open Graph com imagem por idioma").
+
+## SEO (6.2): `twitter-image` não precisou de arquivo próprio
+
+**Contexto:** a seção 6 pedia Open Graph "com imagem por idioma"; Twitter Card de imagem grande (`summary_large_image`) normalmente precisa do seu próprio arquivo (`twitter-image.tsx`).
+**Decisão:** só `opengraph-image.tsx` foi criado. O Next.js usa automaticamente o Open Graph image como `twitter:image` quando não há um `twitter-image` próprio — confirmado no HTML gerado pelo build (`twitter:image` aponta pra mesma URL de `og:image`). `twitter.card: "summary_large_image"` em `generateMetadata` (`[locale]/layout.tsx`) é o único ajuste necessário pra sair do card pequeno padrão.
+**Consequência:** uma imagem a menos pra gerar/manter; se um dia a Twitter Card precisar de um recorte/texto diferente do Open Graph, aí sim vale criar `twitter-image.tsx` separado.
+
 ## SEO (6.1): favicon gerado por código em vez de esperar a imagem de perfil
 
 **Contexto:** o site não tinha nenhum favicon; a imagem de perfil (seção 16, pergunta 6 do documento original) continua `TODO(wellinton)` em `content/_todo.md`, sem previsão.

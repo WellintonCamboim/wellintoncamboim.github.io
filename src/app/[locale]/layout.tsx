@@ -5,8 +5,16 @@ import { IBM_Plex_Mono, Inter } from "next/font/google";
 import { notFound } from "next/navigation";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { siteUrl } from "@/content/links";
-import { routing } from "@/i18n/routing";
+import { routing, type Locale } from "@/i18n/routing";
 import "../globals.css";
+
+// og:locale wants "language_TERRITORY" (BCP 47 is not what the OG spec
+// uses), not the plain locale codes this project routes on.
+const OG_LOCALE: Record<Locale, string> = {
+  pt: "pt_BR",
+  en: "en_US",
+  es: "es_ES",
+};
 
 export const viewport: Viewport = {
   themeColor: [
@@ -39,10 +47,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "common" });
+  const title = t("siteTitle");
+  const description = t("siteDescription");
 
   return {
-    title: t("siteTitle"),
-    description: t("siteDescription"),
+    title,
+    description,
     metadataBase: new URL(siteUrl),
     alternates: {
       canonical: `/${locale}/`,
@@ -52,6 +62,20 @@ export async function generateMetadata({
         es: "/es/",
         "x-default": "/pt/",
       },
+    },
+    openGraph: {
+      title,
+      description,
+      url: `/${locale}/`,
+      siteName: title,
+      type: "website",
+      locale: OG_LOCALE[locale as Locale],
+      alternateLocale: routing.locales.filter((loc) => loc !== locale).map((loc) => OG_LOCALE[loc]),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
     },
   };
 }
